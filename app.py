@@ -122,7 +122,7 @@ def index():
                 return 'ERROR', 403
 
 
-
+        print("running")
         #do something else
         data = request.data
         body = json.loads(data.decode('utf-8'))
