@@ -14,6 +14,4 @@ RUN ls
 # command to run on container start
 CMD [ "python", "./app.py" ]
 
-RUN ls
-
 EXPOSE 5005
