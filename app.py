@@ -36,6 +36,7 @@ def callSendAPI(senderPsid, response, type_response='message'):
 
 #Function for handling a message from MESSENGER
 def handleMessage(senderPsid, receivedMessage):
+    print("handle message")
     callSendAPI(senderPsid, "","sender_action")
     
     #check if received message contains text
