@@ -99,7 +99,7 @@ def index():
     if request.method == 'POST':
         #do something.....
         #VERIFY_TOKEN = config.VERIFY_TOKEN
-        logging.warning("See this message in Flask Debug Toolbar!")
+        logging.warning("line1")
         if 'hub.mode' in request.args:
             mode = request.args.get('hub.mode')
             print(mode)
@@ -123,12 +123,12 @@ def index():
             else:
                 return 'ERROR', 403
 
-
+        logging.warning("line2")
         print("running")
         #do something else
         data = request.data
         body = json.loads(data.decode('utf-8'))
-
+        logging.warning(data)
 
         if 'object' in body and body['object'] == 'page':
             entries = body['entry']
