@@ -97,7 +97,7 @@ def index():
     if request.method == 'POST':
         #do something.....
         #VERIFY_TOKEN = config.VERIFY_TOKEN
-
+        print("test")
         if 'hub.mode' in request.args:
             mode = request.args.get('hub.mode')
             print(mode)
@@ -147,4 +147,4 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port='5005')
+    app.run(host='0.0.0.0', port='5005', debug=True)
