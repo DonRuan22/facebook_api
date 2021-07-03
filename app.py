@@ -2,12 +2,14 @@ from flask import Flask, request
 import requests
 import json
 import config
+import logging
+
 
 
 
 app = Flask(__name__)
 SECRET_KEY = '51036c3d0c5ce54e47b39ce356c7af43'
-PAGE_ACCESS_TOKEN = 'EAA6NcE6FF4IBAIpZA7ZByL59hMmyQqPUYHHGzE82r82rxUtmRdSaFUiBCJrlanEA24K4aOFlNXhh7RDx6JnZCL4kynJDJZANPEJZCOA9ArYNlfa7nFtULV3ICU1qhPQcUtqCAQTTgPKzt3rvA8hfHZBEZCCvcgTMbm5wJuefKw9MharkYBuXh5y'
+PAGE_ACCESS_TOKEN = 'EAA6NcE6FF4IBAOcAvdTwsoObgelVrZAFcVAkOQIn1JiR3z5LbC2YsFfQl1tZB7a6NnCIux2VZBde0DReIWr3i0vbH7BmZAnTivsopMwkzi9S0ZCbKjEGTGdFZC6VPZCJltGaHSNTYDha2mL2GZBWLAJWxHP58RyjOZCAHCjXsNticMe39cZAEidjUs'
 VERIFY_TOKEN = 'rasa-don'
 
 
@@ -97,7 +99,7 @@ def index():
     if request.method == 'POST':
         #do something.....
         #VERIFY_TOKEN = config.VERIFY_TOKEN
-        print("test")
+        logging.warning("See this message in Flask Debug Toolbar!")
         if 'hub.mode' in request.args:
             mode = request.args.get('hub.mode')
             print(mode)
