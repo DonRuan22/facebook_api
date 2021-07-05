@@ -11,11 +11,6 @@ app = Flask(__name__)
 SECRET_KEY = 'b8d43ce14d05828c73257013c8e67b95'
 PAGE_ACCESS_TOKEN = 'EAACCGdwRfhABAKqv5ryNm5Dj2L4bZB9ttKt8rP0wZBtbV45uVkvRDaEGW6BplNja1Rnc2v2BGp2sIJB1xmpvQZBaZBP5YVbBZAdNFB4nA9sCPnTcKpafGkZBX5UNUiZCRArgZCRMiXzQBmzgyuWgccRor2JTe6zlRAsdc0WXz0INsfzO6ENAnshb'
 VERIFY_TOKEN = 'rasa-don'
-logging.basicConfig()
-logging.getLogger().setLevel(logging.DEBUG)
-requests_log = logging.getLogger("requests.packages.urllib3")
-requests_log.setLevel(logging.DEBUG)
-requests_log.propagate = True
 
 
 
@@ -36,8 +31,9 @@ def callSendAPI(senderPsid, response, type_response='message'):
     headers = {'content-type': 'application/json'}
 
     url = 'https://graph.facebook.com/v11.0/me/messages?access_token={}'.format(PAGE_ACCESS_TOKEN)
-    r = requests_log.post(url, json=payload, headers=headers)
-    logging.warning(r)
+    r = requests.post(url, json=payload, headers=headers)
+    logging.warning(r.request.headers) 
+    logging.warning(r.request.data) 
     print(r.text)
 
 
