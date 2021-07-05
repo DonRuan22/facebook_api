@@ -9,7 +9,7 @@ import logging
 
 app = Flask(__name__)
 SECRET_KEY = 'b8d43ce14d05828c73257013c8e67b95'
-PAGE_ACCESS_TOKEN = 'EAACCGdwRfhABAKqv5ryNm5Dj2L4bZB9ttKt8rP0wZBtbV45uVkvRDaEGW6BplNja1Rnc2v2BGp2sIJB1xmpvQZBaZBP5YVbBZAdNFB4nA9sCPnTcKpafGkZBX5UNUiZCRArgZCRMiXzQBmzgyuWgccRor2JTe6zlRAsdc0WXz0INsfzO6ENAnshb'
+PAGE_ACCESS_TOKEN = 'EAACCGdwRfhABAI93MFvabllGGag7lJurbYz4D74ZB7ZBMZCnK2UqegOiLpcMltuExDsBf0RLkuTnVYfGjcCC5RBUeVTcqdwy20fxCygHp9jokeboNcIIPZBD8Fba3zb9tMSndDDNnZCXR34HnWs0ZAW390Sl85LgoUmFVAaFEGlplnZAtR9alNj'
 VERIFY_TOKEN = 'rasa-don'
 
 
@@ -47,9 +47,9 @@ def handleMessage(senderPsid, receivedMessage):
     if 'text' in receivedMessage:
         payload = {'sender': senderPsid,'message': receivedMessage['text']}
         #payload_json = json.loads(payload)
-        print(payload)
+        #print(payload)
         response_rasa = requests.post('https://don-edml6m2f3a-uc.a.run.app/webhooks/rest/webhook', json = payload)
-        print(response_rasa.json()[0]["text"])
+        #print(response_rasa.json()[0]["text"])
         #response = {"text": 'You just sent: {}'.format(receivedMessage['text']) }
         response = {"text": response_rasa.json()[0]["text"] }
 
@@ -102,7 +102,6 @@ def index():
     if request.method == 'POST':
         #do something.....
         #VERIFY_TOKEN = config.VERIFY_TOKEN
-        logging.warning("line1")
         if 'hub.mode' in request.args:
             mode = request.args.get('hub.mode')
             print(mode)
@@ -126,12 +125,9 @@ def index():
             else:
                 return 'ERROR', 403
 
-        logging.warning("line2")
-        print("running")
         #do something else
         data = request.data
         body = json.loads(data.decode('utf-8'))
-        logging.warning(data)
 
         if 'object' in body and body['object'] == 'page':
             entries = body['entry']
