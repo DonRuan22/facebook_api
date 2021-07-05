@@ -55,7 +55,7 @@ def handleMessage(senderPsid, receivedMessage):
         response = {"text": response_rasa.json()[0]["text"] }
 
         callSendAPI(senderPsid, response)
-        logging.warning(response)
+        #logging.warning(response)
     else:
         response = {"text": 'This chatbot only accepts text messages'}
         callSendAPI(senderPsid, response)
