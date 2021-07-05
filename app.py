@@ -32,7 +32,7 @@ def callSendAPI(senderPsid, response, type_response='message'):
 
     url = 'https://graph.facebook.com/v11.0/me/messages?access_token={}'.format(PAGE_ACCESS_TOKEN)
     r = requests.post(url, json=payload, headers=headers)
-    logging.warning(r.json())
+    logging.warning(r.raw())
     print(r.text)
 
 
