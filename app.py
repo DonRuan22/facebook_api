@@ -35,6 +35,7 @@ def callSendAPI(senderPsid, response, type_response='message'):
     logging.warning(r.request.headers) 
     logging.warning(r.url) 
     logging.warning(r.content) 
+    logging.warning(requests._dict_) 
     print(r.text)
 
 
