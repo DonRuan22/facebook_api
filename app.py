@@ -50,10 +50,10 @@ def handleMessage(senderPsid, receivedMessage):
         payload = {'sender': senderPsid,'message': receivedMessage['text']}
         #payload_json = json.loads(payload)
         #print(payload)
-        #response_rasa = requests.post('https://don-edml6m2f3a-uc.a.run.app/webhooks/rest/webhook', json = payload)
+        response_rasa = requests.post('https://don-edml6m2f3a-uc.a.run.app/webhooks/rest/webhook', json = payload)
         #print(response_rasa.json()[0]["text"])
-        response = {"text": 'You just sent: {}'.format(receivedMessage['text']) }
-        #response = {"text": response_rasa.json()[0]["text"] }
+        #response = {"text": 'You just sent: {}'.format(receivedMessage['text']) }
+        response = {"text": response_rasa.json()[0]["text"] }
 
         callSendAPI(senderPsid, response)
         #logging.warning(response)
