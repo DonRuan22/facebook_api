@@ -9,7 +9,7 @@ import os
 
 app = Flask(__name__)
 SECRET_KEY = 'b8d43ce14d05828c73257013c8e67b95'
-PAGE_ACCESS_TOKEN = "EAACCGdwRfhABAJnWziC2XDwEtMyhJE1wboTihpGU7mo8XdVwFZB8a4qe7rYOyu1y4JV0gVHyU2iTiAWneN06JzdzBQM6xBkZCSFpLUCVxjsyRN38mmAuDwR6OIWAEguYMWRW0vrdBofGyoYKQxRgMThQYgUSdyzG4k6VeDjwIV5xFNy3IE"
+PAGE_ACCESS_TOKEN = "EAACCGdwRfhABAHmXhUiszZAoyBe3duFzxwWIvQZAKgY0SoH5mpoNW3ZBCwx1HhkxpNNBPh7lKpBvjwVv0gTUx1ol4o4Pst69k3oQSllpDXyZCCJqHP2Ypy64WIKAxphD9ZBSD7m5NYURFqwoaFXYdVXMFvhZCKZBVJEYx3NZAS30UxPNZBNrlwsnq"
 VERIFY_TOKEN = 'rasa-don'
 
 
@@ -50,10 +50,10 @@ def handleMessage(senderPsid, receivedMessage):
         payload = {'sender': senderPsid,'message': receivedMessage['text']}
         #payload_json = json.loads(payload)
         #print(payload)
-        response_rasa = requests.post('https://don-edml6m2f3a-uc.a.run.app/webhooks/rest/webhook', json = payload)
+        #response_rasa = requests.post('https://don-edml6m2f3a-uc.a.run.app/webhooks/rest/webhook', json = payload)
         #print(response_rasa.json()[0]["text"])
-        #response = {"text": 'You just sent: {}'.format(receivedMessage['text']) }
-        response = {"text": response_rasa.json()[0]["text"] }
+        response = {"text": 'You just sent: {}'.format(receivedMessage['text']) }
+        #response = {"text": response_rasa.json()[0]["text"] }
 
         callSendAPI(senderPsid, response)
         #logging.warning(response)
