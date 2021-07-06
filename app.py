@@ -30,7 +30,7 @@ def callSendAPI(senderPsid, response, type_response='message'):
         }    
     headers = {'content-type': 'application/json'}
 
-    url = 'https://graph.facebook.com/v2.6/me/messages?access_token={}'.format(os.environ.PAGE_ACCESS_TOKEN)
+    url = 'https://graph.facebook.com/v2.6/me/messages?access_token={}'.format(os.environ.get('PAGE_ACCESS_TOKEN'))
     r = requests.post(url, json=payload, headers=headers)
     logging.warning(r.request.headers) 
     logging.warning(r.url) 
