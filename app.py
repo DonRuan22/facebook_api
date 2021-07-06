@@ -9,7 +9,7 @@ import os
 
 app = Flask(__name__)
 SECRET_KEY = 'b8d43ce14d05828c73257013c8e67b95'
-PAGE_ACCESS_TOKEN = "EAACCGdwRfhABANBdZCtGQWTBPWLiH2wnRLreO6vZAtP6WZBvTAsmDkCVYkVD7fmUtGu5ARlGtI1tV8nhSyZCjy0sHGfKRNZAJcemHpaQ0glcfqITZBxuZA6Y6RrehcrgWvZCzAWVT9T3Rln5lOMArSy9A64HPOg19AT9T2PyWWdZAQdeFTuESLpqS"
+#PAGE_ACCESS_TOKEN = "EAACCGdwRfhABANBdZCtGQWTBPWLiH2wnRLreO6vZAtP6WZBvTAsmDkCVYkVD7fmUtGu5ARlGtI1tV8nhSyZCjy0sHGfKRNZAJcemHpaQ0glcfqITZBxuZA6Y6RrehcrgWvZCzAWVT9T3Rln5lOMArSy9A64HPOg19AT9T2PyWWdZAQdeFTuESLpqS"
 VERIFY_TOKEN = 'rasa-don'
 
 
@@ -30,7 +30,7 @@ def callSendAPI(senderPsid, response, type_response='message'):
         }    
     headers = {'content-type': 'application/json'}
 
-    url = 'https://graph.facebook.com/v2.6/me/messages?access_token={}'.format(PAGE_ACCESS_TOKEN)
+    url = 'https://graph.facebook.com/v2.6/me/messages?access_token={}'.format(os.environ.PAGE_ACCESS_TOKEN)
     r = requests.post(url, json=payload, headers=headers)
     logging.warning(r.request.headers) 
     logging.warning(r.url) 
