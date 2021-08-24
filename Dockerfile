@@ -10,7 +10,7 @@ COPY ./ ./
 
 #RUN mkdir output-small
 RUN pip install gunicorn
-RUN pip install googletrans
+RUN pip install deep-translator
 
 RUN ls
 # command to run on container start

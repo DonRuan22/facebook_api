@@ -4,7 +4,7 @@ import json
 import config
 import logging
 import os
-from googletrans import Translator
+from deep_translator import GoogleTranslator
 
 
 
@@ -48,18 +48,15 @@ def handleMessage(senderPsid, receivedMessage):
     
     #check if received message contains text
     if 'text' in receivedMessage:
-        translator_en = Translator()
-        receivedMessage_pt = translator_en.translate(receivedMessage['text'], dest ='en')
-        receivedMessage['text'] = receivedMessage_pt.text
+        receivedMessage['text'] = GoogleTranslator(source='auto', target='en').translate(text=receivedMessage['text'])
         payload = {'sender': senderPsid,'message': receivedMessage['text']}
         #payload_json = json.loads(payload)
         #print(payload)
         response_rasa = requests.post('https://don-edml6m2f3a-uc.a.run.app/webhooks/rest/webhook', json = payload)
-        translator_pt = Translator()
-        response_port = translator_pt.translate(response_rasa.json()[0]["text"], dest ='pt')
+        response_port = GoogleTranslator(source='auto', target='pt').translate(text=response_rasa.json()[0]["text"] )
         #print(response_rasa.json()[0]["text"])
         #response = {"text": 'You just sent: {}'.format(receivedMessage['text']) }
-        response = {"text": response_port.text}
+        response = {"text": response_port }
 
         callSendAPI(senderPsid, response)
         #logging.warning(response)
