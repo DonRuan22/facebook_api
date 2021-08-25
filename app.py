@@ -53,7 +53,7 @@ def handleMessage(senderPsid, receivedMessage):
         #payload_json = json.loads(payload)
         #print(payload)
         response_rasa = requests.post('https://don-edml6m2f3a-uc.a.run.app/webhooks/rest/webhook', json = payload)
-        logging.warning(response_rasa) 
+        logging.warning(response_rasa.json()) 
         if(len(response_rasa.json())>0):
             response_port = GoogleTranslator(source='auto', target='pt').translate(text=response_rasa.json()[0]["text"] )
         else:
