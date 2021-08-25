@@ -53,7 +53,7 @@ def handleMessage(senderPsid, receivedMessage):
         #payload_json = json.loads(payload)
         #print(payload)
         response_rasa = requests.post('https://don-edml6m2f3a-uc.a.run.app/webhooks/rest/webhook', json = payload)
-        if(len(response_rasa.json()[0]["text"])>0):
+        if(len(response_rasa.json()[0])>0):
             response_port = GoogleTranslator(source='auto', target='pt').translate(text=response_rasa.json()[0]["text"] )
         else:
             response_port = 'Sorry error server'
