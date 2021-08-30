@@ -7,6 +7,7 @@ import os
 from deep_translator import GoogleTranslator
 
 
+INIT_VARI=''
 
 app = Flask(__name__)
 SECRET_KEY = 'b8d43ce14d05828c73257013c8e67b95'
@@ -63,9 +64,11 @@ def handleMessage(senderPsid, receivedMessage):
             response_port = 'Sorry error server'
         #print(response_rasa.json()[0]["text"])
         #response = {"text": 'You just sent: {}'.format(receivedMessage['text']) }
+        
         response = {"text": response_port }
-
-        callSendAPI(senderPsid, response)
+        if(INIT_VARI != response_rasa):
+            INIT_VARI = response_rasa
+            callSendAPI(senderPsid, response)
         #logging.warning(response)
     else:
         response = {"text": 'This chatbot only accepts text messages'}
