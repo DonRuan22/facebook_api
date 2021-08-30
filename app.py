@@ -48,6 +48,7 @@ def callSendAPI(senderPsid, response, type_response='message'):
 def handleMessage(senderPsid, receivedMessage):
     print("handle message")
     callSendAPI(senderPsid, "","sender_action")
+    global INIT_VARI
     
     #check if received message contains text
     if 'text' in receivedMessage:
