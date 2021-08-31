@@ -52,7 +52,8 @@ def handleMessage(senderPsid, receivedMessage):
     callSendAPI(senderPsid, "","sender_action")
     global INIT_VARI
     global mId
-    print('mId = '+ str(mId))
+    print('mId variable = '+ str(mId))
+    print('mId message = '+ str(receivedMessage['mid']))
     if (not(receivedMessage['mid'] in mId)):
         
         mId.append(receivedMessage['mid'])
