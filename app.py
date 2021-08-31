@@ -14,7 +14,7 @@ SECRET_KEY = 'b8d43ce14d05828c73257013c8e67b95'
 #PAGE_ACCESS_TOKEN = "EAACCGdwRfhABANBdZCtGQWTBPWLiH2wnRLreO6vZAtP6WZBvTAsmDkCVYkVD7fmUtGu5ARlGtI1tV8nhSyZCjy0sHGfKRNZAJcemHpaQ0glcfqITZBxuZA6Y6RrehcrgWvZCzAWVT9T3Rln5lOMArSy9A64HPOg19AT9T2PyWWdZAQdeFTuESLpqS"
 VERIFY_TOKEN = 'rasa-don'
 global INIT_VARI
-INIT_VARI=0
+INIT_VARI=''
 
 
 
@@ -69,8 +69,8 @@ def handleMessage(senderPsid, receivedMessage):
         #response = {"text": 'You just sent: {}'.format(receivedMessage['text']) }
         
         response = {"text": response_port }
-        if(INIT_VARI == 0):
-            INIT_VARI = INIT_VARI + 1
+        if(INIT_VARI != response_rasa):
+            INIT_VARI = response_rasa
             callSendAPI(senderPsid, response)
         #logging.warning(response)
     else:
