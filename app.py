@@ -58,7 +58,7 @@ def handleMessage(senderPsid, receivedMessage):
         #print(payload)
         up_server_payload= {'zero':'hello'}
         response_up_server = requests.post('https://nlgdonexp-edml6m2f3a-uc.a.run.app/chatbot', json = up_server_payload)
-        response_rasa = requests.post('https://don-edml6m2f3a-uc.a.run.app/webhooks/rest/webhook', json = payload)
+        response_rasa = requests.post('https://don-edml6m2f3a-uc.a.run.app/webhooks/rest/webhook', json = payload, timeout=None)
         logging.warning('response') 
         logging.warning(response_rasa.json()) 
         if(len(response_rasa.json())>0):
