@@ -14,6 +14,8 @@ SECRET_KEY = 'b8d43ce14d05828c73257013c8e67b95'
 #PAGE_ACCESS_TOKEN = "EAACCGdwRfhABANBdZCtGQWTBPWLiH2wnRLreO6vZAtP6WZBvTAsmDkCVYkVD7fmUtGu5ARlGtI1tV8nhSyZCjy0sHGfKRNZAJcemHpaQ0glcfqITZBxuZA6Y6RrehcrgWvZCzAWVT9T3Rln5lOMArSy9A64HPOg19AT9T2PyWWdZAQdeFTuESLpqS"
 VERIFY_TOKEN = 'rasa-don'
 global INIT_VARI
+global mId 
+mId = []
 INIT_VARI=''
 
 
@@ -49,33 +51,37 @@ def handleMessage(senderPsid, receivedMessage):
     print("handle message")
     callSendAPI(senderPsid, "","sender_action")
     global INIT_VARI
-    
-    #check if received message contains text
-    if 'text' in receivedMessage:
-        receivedMessage['text'] = GoogleTranslator(source='auto', target='en').translate(text=receivedMessage['text'])
-        payload = {'sender': senderPsid,'message': receivedMessage['text']}
-        #payload_json = json.loads(payload)
-        #print(payload)
-        up_server_payload= {'zero':'hello'}
-        response_up_server = requests.post('https://nlgdonexp-edml6m2f3a-uc.a.run.app/chatbot', json = up_server_payload)
-        response_rasa = requests.post('https://don-edml6m2f3a-uc.a.run.app/webhooks/rest/webhook', json = payload, timeout=None)
-        logging.warning('response') 
-        logging.warning(response_rasa.json()) 
-        if(len(response_rasa.json())>0):
-            response_port = GoogleTranslator(source='auto', target='pt').translate(text=response_rasa.json()[0]["text"] )
-        else:
-            response_port = 'Sorry error server'
-        #print(response_rasa.json()[0]["text"])
-        #response = {"text": 'You just sent: {}'.format(receivedMessage['text']) }
+    global mId
+    print(mId)
+    if (not(receivedMessage['mid'] in mId)):
         
-        response = {"text": response_port }
-        if(INIT_VARI != response_rasa):
-            INIT_VARI = response_rasa
+        mId.append(receivedMessage['mid'])
+        #check if received message contains text
+        if 'text' in receivedMessage:
+            receivedMessage['text'] = GoogleTranslator(source='auto', target='en').translate(text=receivedMessage['text'])
+            payload = {'sender': senderPsid,'message': receivedMessage['text']}
+            #payload_json = json.loads(payload)
+            #print(payload)
+            up_server_payload= {'zero':'hello'}
+            response_up_server = requests.post('https://nlgdonexp-edml6m2f3a-uc.a.run.app/chatbot', json = up_server_payload)
+            response_rasa = requests.post('https://don-edml6m2f3a-uc.a.run.app/webhooks/rest/webhook', json = payload, timeout=None)
+            logging.warning('response') 
+            logging.warning(response_rasa.json()) 
+            if(len(response_rasa.json())>0):
+                response_port = GoogleTranslator(source='auto', target='pt').translate(text=response_rasa.json()[0]["text"] )
+            else:
+                response_port = 'Sorry error server'
+            #print(response_rasa.json()[0]["text"])
+            #response = {"text": 'You just sent: {}'.format(receivedMessage['text']) }
+            
+            response = {"text": response_port }
+            if(INIT_VARI != response_rasa):
+                INIT_VARI = response_rasa
+                callSendAPI(senderPsid, response)
+            #logging.warning(response)
+        else:
+            response = {"text": 'This chatbot only accepts text messages'}
             callSendAPI(senderPsid, response)
-        #logging.warning(response)
-    else:
-        response = {"text": 'This chatbot only accepts text messages'}
-        callSendAPI(senderPsid, response)
 
 
 
